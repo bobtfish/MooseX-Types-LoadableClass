@@ -17,6 +17,8 @@ author_requires 'Test::NoTabs';
 author_requires 'Test::Pod' => '1.14';
 author_requires 'Test::Pod::Coverage' => '1.08';
 
+resources repository => 'git://github.com/bobtfish/MooseX-Types-LoadableClass.git';
+
 tests 't/*.t';
 author_tests 't/author';
 
