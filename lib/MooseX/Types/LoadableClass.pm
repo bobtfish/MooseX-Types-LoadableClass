@@ -5,6 +5,7 @@ use MooseX::Types -declare => [qw/ ClassName /];
 use MooseX::Types::Moose qw/Str/;
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
+use namespace::clean -except => [qw/ import ClassName /];
 
 our $VERSION = '0.001';
 $VERSION = eval $VERSION;
