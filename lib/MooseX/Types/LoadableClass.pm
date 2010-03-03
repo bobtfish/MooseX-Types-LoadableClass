@@ -6,6 +6,9 @@ use MooseX::Types::Moose qw/Str/;
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
 
+our $VERSION = '0.001';
+$VERSION = eval $VERSION;
+
 subtype ClassName, as 'ClassName', where { 1 };
 coerce ClassName, from Str, via { Class::MOP::load_class($_); $_ };
 
