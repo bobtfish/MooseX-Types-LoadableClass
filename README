@@ -1,0 +1,38 @@
+NAME
+    MooseX::Types::LoadableClass - ClassName type constraint with coercion
+    to load the class.
+
+SYNOPSIS
+        package MyClass;
+        use Moose;
+        use MooseX::Types::LoadableClass qw/ClassName/;
+
+        has foobar_class => (
+            is => 'ro',
+            required => 1,
+            isa => ClassName,
+            coerce => 1,
+        );
+
+        MyClass->new(foobar_class => 'FooBar'); # FooBar.pm is loaded or an
+                                                # exception is thrown.
+
+DESCRIPTION
+        use Moose::Util::TypeConstraints;
+
+        my $tc = subtype as ClassName;
+        coerce $tc, from Str, via { Class::MOP::load_class($_); $_ };
+
+    I've written those three lines of code quite a lot of times, in quite a
+    lot of places.
+
+    Now I don't have to.
+
+AUTHOR
+    Tomas Doran (t0m) "<bobtfish@bobtfish.net>"
+
+COPYRIGHT AND LICENSE
+    Copyright (c) 2010 the above named authors.
+
+    Licensed under the same terms as perl itself.
+

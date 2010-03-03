@@ -46,7 +46,7 @@ Now I don't have to.
 
 =head1 AUTHOR
 
-Tomas Doran (t0m) C<< <bobtfish@bobtfish.net>
+Tomas Doran (t0m) C<< <bobtfish@bobtfish.net> >>
 
 =head1 COPYRIGHT AND LICENSE
 
