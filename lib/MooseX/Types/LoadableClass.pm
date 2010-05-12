@@ -1,11 +1,12 @@
 package MooseX::Types::LoadableClass;
 use strict;
 use warnings;
-use MooseX::Types -declare => [qw/ ClassName LoadableClass /];
+use MooseX::Types -declare => [qw/ LoadableClass /];
+use Sub::Exporter -setup => [qw( LoadableClass ClassName )];
 use MooseX::Types::Moose qw/Str/;
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
-use namespace::clean -except => [qw/ import ClassName /];
+use namespace::clean -except => [qw/ import ClassName LoadableClass /];
 
 our $VERSION = '0.003';
 $VERSION = eval $VERSION;
@@ -13,8 +14,7 @@ $VERSION = eval $VERSION;
 subtype LoadableClass, as 'ClassName', where { 1 };
 coerce LoadableClass, from Str, via { Class::MOP::load_class($_); $_ };
 
-subtype ClassName, as LoadableClass, where { 1 };
-coerce ClassName, from Str, via { Class::MOP::load_class($_); $_ };
+*ClassName = \&LoadableClass;
 
 __PACKAGE__->meta->make_immutable;
 1;
