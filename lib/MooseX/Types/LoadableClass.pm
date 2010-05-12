@@ -1,18 +1,21 @@
 package MooseX::Types::LoadableClass;
 use strict;
 use warnings;
-use MooseX::Types -declare => [qw/ ClassName /];
+use MooseX::Types -declare => [qw/ ClassName LoadableClass /];
 use MooseX::Types::Moose qw/Str/;
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
 use namespace::clean -except => [qw/ import ClassName /];
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 $VERSION = eval $VERSION;
 
-subtype ClassName, as 'ClassName', where { 1 };
-coerce ClassName, from Str, via { Class::MOP::load_class($_); $_ };
+foreach my $name (ClassName, LoadableClass) {
+    subtype $name, as 'ClassName', where { 1 };
+    coerce $name, from Str, via { Class::MOP::load_class($_); $_ };
+}
 
+__PACKAGE__->meta->make_immutable;
 1;
 __END__
 
@@ -24,12 +27,12 @@ MooseX::Types::LoadableClass - ClassName type constraint with coercion to load t
 
     package MyClass;
     use Moose;
-    use MooseX::Types::LoadableClass qw/ClassName/;
+    use MooseX::Types::LoadableClass qw/ LoadableClass /;
 
     has foobar_class => (
         is => 'ro',
         required => 1,
-        isa => ClassName,
+        isa => LoadableClass,
         coerce => 1,
     );
 

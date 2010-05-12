@@ -10,12 +10,12 @@ use Class::MOP ();
 {
     package MyClass;
     use Moose;
-    use MooseX::Types::LoadableClass qw/ClassName/;
+    use MooseX::Types::LoadableClass qw/LoadableClass/;
 
     has foobar_class => (
         is => 'ro',
         required => 1,
-        isa => ClassName,
+        isa => LoadableClass,
         coerce => 1,
     );
 }
