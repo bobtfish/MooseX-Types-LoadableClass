@@ -1,9 +1,9 @@
 0.003 12-05-2010
-  - 'ClassName' is now exactly the same as 'LoadableClass', so that old code
-    still works if you use a custom type map of 'LoadableClass' for
-    MX::Storage/Kioku etc.
+  - 'ClassName' is now a subtype of 'LoadableClass', so that old code still
+    works if you use a custom type map of 'LoadableClass'
+    for MX::Storage/Kioku etc.
     (Note that they should normally work anyway with a default type map, as
-    they subtype "normal" ClassName which subtypes Str)
+    they subtype ClassName which subtypes Str)
 
 0.002 12-05-2010
   - Change the name to 'LoadableClass' as this is what people expect.
