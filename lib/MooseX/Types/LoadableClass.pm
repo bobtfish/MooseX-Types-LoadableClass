@@ -5,7 +5,7 @@ use MooseX::Types -declare => [qw/ ClassName LoadableClass /];
 use MooseX::Types::Moose qw/Str/;
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
-use namespace::clean -except => [qw/ import ClassName /];
+use namespace::clean -except => [qw/ import /];
 
 our $VERSION = '0.003';
 $VERSION = eval $VERSION;
@@ -13,8 +13,7 @@ $VERSION = eval $VERSION;
 subtype LoadableClass, as 'ClassName', where { 1 };
 coerce LoadableClass, from Str, via { Class::MOP::load_class($_); $_ };
 
-subtype ClassName, as LoadableClass, where { 1 };
-coerce ClassName, from Str, via { Class::MOP::load_class($_); $_ };
+__PACKAGE__->type_storage->{ClassName} = __PACKAGE__->type_storage->{LoadableClass};
 
 __PACKAGE__->meta->make_immutable;
 1;
