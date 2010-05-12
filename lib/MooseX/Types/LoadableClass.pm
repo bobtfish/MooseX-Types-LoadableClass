@@ -7,13 +7,14 @@ use Moose::Util::TypeConstraints;
 use Class::MOP ();
 use namespace::clean -except => [qw/ import ClassName /];
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 $VERSION = eval $VERSION;
 
-foreach my $name (ClassName, LoadableClass) {
-    subtype $name, as 'ClassName', where { 1 };
-    coerce $name, from Str, via { Class::MOP::load_class($_); $_ };
-}
+subtype LoadableClass, as 'ClassName', where { 1 };
+coerce LoadableClass, from Str, via { Class::MOP::load_class($_); $_ };
+
+subtype ClassName, as LoadableClass, where { 1 };
+coerce ClassName, from Str, via { Class::MOP::load_class($_); $_ };
 
 __PACKAGE__->meta->make_immutable;
 1;
