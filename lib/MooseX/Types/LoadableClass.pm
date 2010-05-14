@@ -57,9 +57,21 @@ a lot of places.
 
 Now I don't have to.
 
-=head1 AUTHOR
+=head1 TYPES EXPORTED
+
+=head2 LoadableClass
+
+A normal class / package.
+
+=head2 LoadableRole
+
+Like C<LoadableClass>, except the loaded package must be a L<Moose::Role>.
+
+=head1 AUTHORS
 
 Tomas Doran (t0m) C<< <bobtfish@bobtfish.net> >>
+
+Florian Ragwitz (rafl) C<< <rafl@debian.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
