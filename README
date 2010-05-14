@@ -28,8 +28,17 @@ DESCRIPTION
 
     Now I don't have to.
 
-AUTHOR
+TYPES EXPORTED
+  LoadableClass
+    A normal class / package.
+
+  LoadableRole
+    Like "LoadableClass", except the loaded package must be a Moose::Role.
+
+AUTHORS
     Tomas Doran (t0m) "<bobtfish@bobtfish.net>"
+
+    Florian Ragwitz (rafl) "<rafl@debian.org>"
 
 COPYRIGHT AND LICENSE
     Copyright (c) 2010 the above named authors.
