@@ -1,8 +1,8 @@
 package MooseX::Types::LoadableClass;
 use strict;
 use warnings;
-use MooseX::Types -declare => [qw/ ClassName LoadableClass /];
-use MooseX::Types::Moose qw/Str/;
+use MooseX::Types -declare => [qw/ ClassName LoadableClass LoadableRole /];
+use MooseX::Types::Moose qw(Str RoleName), ClassName => { -as => 'MooseClassName' };
 use Moose::Util::TypeConstraints;
 use Class::MOP ();
 use namespace::clean -except => [qw/ import /];
@@ -10,9 +10,15 @@ use namespace::clean -except => [qw/ import /];
 our $VERSION = '0.003';
 $VERSION = eval $VERSION;
 
-subtype LoadableClass, as 'ClassName', where { 1 };
+subtype LoadableClass, as MooseClassName;
 coerce LoadableClass, from Str, via { Class::MOP::load_class($_); $_ };
 
+subtype LoadableRole, as RoleName;
+# this is alright because ClassName is just is_class_loaded, with no
+# constraints on the metaclass
+coerce LoadableRole, from Str, via { to_LoadableClass($_) };
+
+# back compat
 __PACKAGE__->type_storage->{ClassName} = __PACKAGE__->type_storage->{LoadableClass};
 
 __PACKAGE__->meta->make_immutable;
