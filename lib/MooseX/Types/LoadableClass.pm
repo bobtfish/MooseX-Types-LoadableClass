@@ -7,7 +7,7 @@ use Moose::Util::TypeConstraints;
 use Class::MOP ();
 use namespace::clean -except => [qw/ import /];
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 $VERSION = eval $VERSION;
 
 subtype LoadableClass, as MooseClassName;
