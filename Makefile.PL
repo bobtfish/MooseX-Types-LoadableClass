@@ -7,7 +7,7 @@ use Module::Install::AuthorTests;
 name 'MooseX-Types-LoadableClass';
 all_from 'lib/MooseX/Types/LoadableClass.pm';
 
-requires 'MooseX::Types';
+requires 'MooseX::Types' => '0.22';
 requires 'namespace::clean';
 
 test_requires 'Moose';
