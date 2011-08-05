@@ -4,14 +4,14 @@ use warnings;
 use MooseX::Types -declare => [qw/ ClassName LoadableClass LoadableRole /];
 use MooseX::Types::Moose qw(Str RoleName), ClassName => { -as => 'MooseClassName' };
 use Moose::Util::TypeConstraints;
-use Class::MOP ();
+use Class::Load qw/ load_optional_class /;
 use namespace::clean -except => [qw/ import /];
 
 our $VERSION = '0.005';
 $VERSION = eval $VERSION;
 
 subtype LoadableClass, as MooseClassName;
-coerce LoadableClass, from Str, via { Class::MOP::load_class($_); $_ };
+coerce LoadableClass, from Str, via { load_optional_class($_) ? $_ : undef };
 
 subtype LoadableRole, as RoleName;
 # this is alright because ClassName is just is_class_loaded, with no

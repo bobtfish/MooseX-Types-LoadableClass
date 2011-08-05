@@ -1,3 +1,4 @@
+^MYMETA
 ^MooseX-Types-LoadableClass.*
 ^MANIFEST.SKIP
 \.git

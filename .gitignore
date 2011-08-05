@@ -1,5 +1,8 @@
+MYMETA.json
+MYMETA.yml
 MooseX-Types-LoadableClass*
 META.yml
+META.json
 Makefile
 blib
 inc

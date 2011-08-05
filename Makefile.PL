@@ -9,6 +9,7 @@ all_from 'lib/MooseX/Types/LoadableClass.pm';
 
 requires 'MooseX::Types' => '0.22';
 requires 'namespace::clean';
+requires 'Class::Load' => '0.06';
 
 test_requires 'Moose';
 test_requires 'Test::More' => '0.88';
