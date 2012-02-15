@@ -11,7 +11,8 @@ our $VERSION = '0.006';
 $VERSION = eval $VERSION;
 
 subtype LoadableClass, as MooseClassName;
-coerce LoadableClass, from Str, via { load_optional_class($_) ? $_ : undef };
+coerce LoadableClass, from Str,
+    via { my $name = $_; load_optional_class($name) ? $name : undef };
 
 subtype LoadableRole, as RoleName;
 # this is alright because ClassName is just is_class_loaded, with no
@@ -19,7 +20,8 @@ subtype LoadableRole, as RoleName;
 coerce LoadableRole, from Str, via { to_LoadableClass($_) };
 
 # back compat
-__PACKAGE__->type_storage->{ClassName} = __PACKAGE__->type_storage->{LoadableClass};
+__PACKAGE__->type_storage->{ClassName}
+    = __PACKAGE__->type_storage->{LoadableClass};
 
 __PACKAGE__->meta->make_immutable;
 1;
