@@ -1,3 +1,4 @@
+0.008 13-03-2012
   - Do not require Test::Exception. RT#75246
 
 0.007 15-02-2012

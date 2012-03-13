@@ -7,7 +7,7 @@ use Moose::Util::TypeConstraints;
 use Class::Load qw/ load_optional_class /;
 use namespace::clean -except => [qw/ import /];
 
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 $VERSION = eval $VERSION;
 
 subtype LoadableClass, as MooseClassName;
