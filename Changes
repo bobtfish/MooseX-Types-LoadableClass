@@ -1,3 +1,5 @@
+  - Do not require Test::Exception. RT#75246
+
 0.007 15-02-2012
   - Be more paranoid about the potential for $_ being clobbered.
 

@@ -4,7 +4,6 @@ use FindBin ();
 use lib $FindBin::Bin . '/lib';
 
 use Test::More;
-use Test::Exception;
 use Class::MOP ();
 
 {
@@ -26,16 +25,20 @@ use Class::MOP ();
 }
 
 ok !Class::MOP::is_class_loaded('FooBarTestClass');
-lives_ok { MyClass->new(foobar_class => 'FooBarTestClass') };
+ok eval { MyClass->new(foobar_class => 'FooBarTestClass') };
 ok Class::MOP::is_class_loaded('FooBarTestClass');
 
-dies_ok { MyClass->new(foobar_class => 'FooBarTestClassDoesNotExist') };
+ok !eval { MyClass->new(foobar_class => 'FooBarTestClassDoesNotExist') };
+ok $@;
 
 ok !Class::MOP::is_class_loaded('FooBarTestRole');
-lives_ok { MyClass->new(foobar_role => 'FooBarTestRole') };
+ok eval { MyClass->new(foobar_role => 'FooBarTestRole') };
 ok Class::MOP::is_class_loaded('FooBarTestRole');
 
-dies_ok { MyClass->new(foobar_role => 'FooBarTestClass') };
-dies_ok { MyClass->new(foobar_role => 'FooBarTestRoleDoesNotExist') };
+ok !eval { MyClass->new(foobar_role => 'FooBarTestClass') };
+ok $@;
+
+ok !eval { MyClass->new(foobar_role => 'FooBarTestRoleDoesNotExist') };
+ok $@;
 
 done_testing;
